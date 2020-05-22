@@ -17,6 +17,7 @@
 
 import logging
 import sys
+import traceback
 
 from osc_lib import clientmanager
 from osc_lib import shell
@@ -151,6 +152,8 @@ def get_plugin_modules(group):
         except Exception:
             sys.stderr.write(
                 "WARNING: Failed to import plugin %s.\n" % ep.name)
+            traceback.print_exc()
+            LOG.exception("")
             continue
 
         module = sys.modules[ep.module_name]
